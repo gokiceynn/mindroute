@@ -1,0 +1,26 @@
+# Python
+app/venv/
+**/__pycache__/
+*.pyc
+
+# Node / Vite
+mindroute-web/node_modules/
+mindroute-web/.vite/
+mindroute-web/dist/
+
+# Env & local config
+.env
+.env.local
+app/.env
+app/.env.local
+mindroute-web/.env
+mindroute-web/.env.local
+
+# OS/IDE
+.DS_Store
+.vscode/
+
+# Medya - büyük dosyalar
+*.mp4
+*.mov
+*.avi
