@@ -111,8 +111,7 @@ def upsert_elements(data: dict):
             updated += 1
 
     print(f"✅ İşlem bitti → eklendi: {added}, güncellendi: {updated}, atlandı: {skipped}")
-
-    def main():
+def main():
     try:
         ensure_indexes()
     except Exception as e:
@@ -122,9 +121,11 @@ def upsert_elements(data: dict):
     data = fetch_overpass(q)
     upsert_elements(data)
 
+
 if __name__ == "__main__":
     print(">>> running fetch_places.py")  # debug log
     main()
+
 
 
  
