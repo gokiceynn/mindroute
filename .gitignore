@@ -24,3 +24,10 @@ mindroute-web/.env.local
 *.mp4
 *.mov
 *.avi
+
+# SVG ve arka plan dosyaları - büyükse hariç tut
+apothicaria-*.svg
+backgroundmain.png
+
+# Package lock
+package-lock.json
