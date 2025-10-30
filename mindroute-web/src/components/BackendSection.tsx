@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { gsap } from "gsap";
+import ruhhaliImg from "../assets/hero/ruhhali.png";
+import videosecImg from "../assets/hero/videosec.png";
+import butonn1Img from "../assets/hero/butonn1.png";
+import backendImg from "../assets/hero/backend.png";
 
 const BackendSection = () => {
   const [selectedCity, setSelectedCity] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [videoUploaded, setVideoUploaded] = useState(false);
+  const [mood, setMood] = useState("");
+  const [analyzing, setAnalyzing] = useState(false);
   
   const handleVideoUpload = (e) => {
     const file = e.target.files[0];
@@ -12,6 +18,22 @@ const BackendSection = () => {
       setVideoUploaded(true);
       // Burada video upload işlemi yapılabilir
     }
+  };
+
+  const handleAnalyze = () => {
+    if (!videoUploaded) {
+      alert("Lütfen önce video yükleyin!");
+      return;
+    }
+
+    setAnalyzing(true);
+    setTimeout(() => {
+      // örnek olarak rastgele ruh hali atıyoruz
+      const moods = ["Mutlu 😊", "Üzgün 😢", "Stresli 😓", "Rahat 😌", "Heyecanlı 🤩"];
+      const randomMood = moods[Math.floor(Math.random() * moods.length)];
+      setMood(randomMood);
+      setAnalyzing(false);
+    }, 2000);
   };
 
   const cities = [
@@ -50,7 +72,7 @@ const BackendSection = () => {
     <div
       className="relative w-screen h-screen bg-cover bg-center overflow-hidden"
       style={{
-        backgroundImage: `url('/src/assets/hero/backend.png')`,
+        backgroundImage: `url(${backendImg})`,
       }}
     >
       {/* Sol meşale alevi */}
@@ -72,14 +94,14 @@ const BackendSection = () => {
       </h1>
 
       {/* Şehir Seç Butonu */}
-      <div className="absolute top-[38%] left-[28%] transform -translate-x-1/2 flex flex-col items-center">
+      <div className="absolute top-[38%] left-[10%] flex flex-col items-center">
         {/* Buton */}
         <div
           onClick={() => setIsOpen(!isOpen)}
-          className="relative w-[700px] h-[300px] cursor-pointer select-none flex items-center justify-center"
+          className="relative z-20 w-[700px] h-[300px] cursor-pointer select-none flex items-center justify-center button-gold"
         >
           <img
-            src="/src/assets/hero/butonn1.png"
+            src={butonn1Img}
             alt="Şehir Seç Butonu"
             className="absolute w-full h-full object-contain pointer-events-none"
           />
@@ -112,14 +134,14 @@ const BackendSection = () => {
         )}
       </div>
 
-      {/* Video Seç Butonu (sağda) */}
-      <div className="absolute top-[38%] right-[30%] transform translate-x-1/2 flex flex-col items-center">
+      {/* Video Seç Butonu */}
+      <div className="absolute top-[38%] left-[52%] transform -translate-x-1/2 flex flex-col items-center">
         <label
           htmlFor="videoUpload"
-          className="relative w-[700px] h-[300px] cursor-pointer flex items-center justify-center select-none"
+          className="relative z-10 w-[700px] h-[300px] cursor-pointer flex items-center justify-center select-none button-gold"
         >
           <img
-            src="/src/assets/hero/videosec.png"
+            src={videosecImg}
             alt="Video Seç Butonu"
             className="absolute w-full h-full object-contain pointer-events-none"
           />
@@ -135,6 +157,38 @@ const BackendSection = () => {
           onChange={handleVideoUpload}
           className="hidden"
         />
+      </div>
+
+      {/* Analiz Et Butonu - Şehir ve Video butonlarının altında, sağa kaydırıldı */}
+      <div className="absolute top-[68%] left-[40%] flex flex-col items-center">
+        <button
+          onClick={handleAnalyze}
+          className="bg-[#3b5323] border-2 border-[#e0c773] text-[#f1d88c] text-3xl font-bold py-3 px-10 rounded-xl shadow-md hover:bg-[#4f6a2e] transition-all duration-300 button-gold"
+        >
+          {analyzing ? "Analiz Ediliyor..." : "Analiz Et"}
+        </button>
+      </div>
+
+      {/* Ruh Hali Kutusu - En sağda */}
+      <div className="absolute top-[38%] right-[3%] flex flex-col items-center">
+        <div className="relative w-[700px] h-[300px]">
+          <img
+            src={ruhhaliImg}
+            alt="Ruh Hali"
+            className="absolute w-full h-full object-contain pointer-events-none"
+          />
+          <span
+            className="absolute text-[#f1d88c] text-5xl font-extrabold"
+            style={{
+              left: "52%",
+              top: "52%",
+              transform: "translateY(-50%)",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {mood}
+          </span>
+        </div>
       </div>
     </div>
   );

@@ -14,3 +14,9 @@ html, body {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.button-gold:hover {
+  transform: scale(1.05);
+  border-color: #f1d88c;
+  transition: all 0.3s ease;
+}
